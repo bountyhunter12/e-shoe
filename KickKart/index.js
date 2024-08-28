@@ -15,8 +15,10 @@ const stripeGateway = stripe(process.env.STRIPE_API_KEY);
 // Middleware
 const allowedOrigins = [
   'https://kick-kart-front.vercel.app',
-  'https://e-shoe.vercel.app'
+  'https://e-shoe.vercel.app',
+  'https://e-shoe-1.vercel.app' // Add this
 ];
+
 
 app.use(cors({
     origin: function(origin, callback) {
