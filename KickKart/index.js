@@ -13,8 +13,19 @@ const app = express();
 const stripeGateway = stripe(process.env.STRIPE_API_KEY);
 
 // Middleware
+const allowedOrigins = [
+  'https://kick-kart-front.vercel.app',
+  'https://e-shoe.vercel.app'
+];
+
 app.use(cors({
-    origin: 'https://kick-kart-front.vercel.app',  // Allow requests from both localhost and your frontend on Vercel
+    origin: function(origin, callback) {
+        if (allowedOrigins.includes(origin) || !origin) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     methods: 'GET,POST,PUT,DELETE',
     credentials: true,
 }));
